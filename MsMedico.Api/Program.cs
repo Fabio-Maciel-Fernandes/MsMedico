@@ -79,7 +79,7 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 // Configura o middleware de autenticação e autorização.
 app.UseAuthentication();
 app.UseAuthorization();
