@@ -41,5 +41,8 @@ jobs:
     - name: Implantação no Kubernetes
       run: kubectl apply -f MsMedico.Api/Deploy/deployment.yaml
 
+    - name: Autoscaling no Kubernetes
+      run: kubectl apply -f MsMedico.Api/Deploy/hpa.yaml
+
     - name: Atualizando as pods
       run: kubectl rollout restart deployment medicoapipod
