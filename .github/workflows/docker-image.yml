@@ -42,4 +42,4 @@ jobs:
       run: kubectl apply -f MsMedico.Api/Deploy/deployment.yaml
 
     - name: Atualizando as pods
-      run: kubectl rollout restart deployment msmedicoapipod
+      run: kubectl rollout restart deployment medicoapipod
