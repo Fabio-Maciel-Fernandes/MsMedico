@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -21,6 +21,10 @@
     <ProjectReference Include="..\MsMedico.Core\MsMedico.Core.csproj" />
     <ProjectReference Include="..\MsMedico.Infra\MsMedico.Infra.csproj" />
     <ProjectReference Include="..\MsMedico.Shared\MsMedico.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Deploy\" />
   </ItemGroup>
 
 </Project>

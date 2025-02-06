@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medicoapipod
+  labels:
+    app: medicoapipod
+    environment: production
+    team: dev
+  annotations:
+    description: "Deployment do aplicativo de medicos API"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medicoapipod
+  template:
+    metadata:
+      labels:
+        app: medicoapipod
+        environment: production
+        team: dev
+      annotations:
+        description: "Pod do aplicativo de medicos API"
+    spec: 
+      containers:
+      - name: medicoapipod
+        image: fabaofloripa/medico.api:latest
+        ports:
+          - containerPort: 8080
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: medicoapipod-service
+  labels:
+    app: medicoapipod
+    environment: production
+    team: dev
+  annotations:
+    description: "Service para o aplicativo de medicos API"
+spec:
+  selector:
+    app: medicoapipod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
