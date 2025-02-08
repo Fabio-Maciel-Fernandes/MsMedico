@@ -96,5 +96,13 @@ namespace MsMedico.Api.Controllers
             _pacienteService.CancelarConsulta(request.CRM, request.ConsultaId, request.Justificativa);
             return Ok("Consulta cancelada com sucesso");
         }
+
+        [HttpDelete("cancelar-consulta2")]
+        [Authorize(Roles = "Paciente")]
+        public ActionResult CancelarConsulta2([FromBody] CancelamentoRequest request)
+        {
+            _pacienteService.CancelarConsulta(request.CRM, request.ConsultaId, request.Justificativa);
+            return Ok("Consulta cancelada com sucesso");
+        }
     }
 }
