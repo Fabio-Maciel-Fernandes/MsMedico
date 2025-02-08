@@ -23,7 +23,7 @@ namespace MsMedico.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login([FromBody] LoginRequest request)
+        public ActionResult Login([FromBody] MedicoLoginRequest request)
         {
             var medico = _medicoService.Login(request.CRM, request.Senha);
             if (medico == null)

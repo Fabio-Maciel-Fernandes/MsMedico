@@ -5,6 +5,6 @@ namespace MsMedico.Api.RequestModels
     public class AgendamentoRequest
     {
         public string CRM { get; set; }
-        public Consulta Consulta { get; set; }
+        public Consulta Consulta { get; set; }        
     }
 }

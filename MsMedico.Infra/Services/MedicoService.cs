@@ -42,7 +42,8 @@ namespace MsMedico.Infra.Services
                 var h = medico.HorariosDisponiveis.FirstOrDefault(h => h.Id == horario.Id);
                 if (h != null)
                 {
-                    h = horario;
+                    medico.HorariosDisponiveis.Remove(h);
+                    medico.HorariosDisponiveis.Add(horario);
                     _medicoRepository.AtualizarMedico(medico);
                 }
             }
@@ -76,6 +77,11 @@ namespace MsMedico.Infra.Services
             }
         }
 
+        public Medico ObterMedicoPorCrm(string crm)
+        {
+            return _medicoRepository.ObterMedicoPorCrm(crm);
+        }
+
         public List<Medico> ObterMedicos(string especialidade, double latitude, double longitude, double? distancia, double? avaliacao)
         {
             return _medicoRepository.ObterMedicosComFiltros(especialidade, latitude, longitude, distancia, avaliacao)
@@ -92,8 +98,11 @@ namespace MsMedico.Infra.Services
                     ConsultasAgendadas = m.ConsultasAgendadas,
                     Role = m.Role,
                     Latitude = m.Latitude,
-                    Longitude = m.Longitude
+                    Longitude = m.Longitude,
+                    ValorConsulta = m.ValorConsulta
                 })
+                .Where(m => (distancia == null || m.DistanciaKm <= distancia)
+                        && (avaliacao == null || m.Avaliacao >= avaliacao))
                 .OrderBy(m => m.DistanciaKm)
                 .Take(10)
                 .ToList();
@@ -131,6 +140,17 @@ namespace MsMedico.Infra.Services
         public List<string> ObterRolesDoMedico(string crm)
         {
             return _medicoRepository.ObterRolesDoMedico(crm);
+        }
+
+        public AgendaMedico ObterAgenda(string crm)
+        {
+            var medico = _medicoRepository.ObterMedicoPorCrm(crm);
+            if (medico == null)
+            {
+                return null;
+            }
+
+            return new AgendaMedico(medico);
         }
     }
 }

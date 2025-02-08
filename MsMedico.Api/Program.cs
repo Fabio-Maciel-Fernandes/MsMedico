@@ -12,7 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IDistanciaService, DistanciaService>();
-
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IPacienteService, PacienteService>();
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 
 builder.Services.AddControllers();

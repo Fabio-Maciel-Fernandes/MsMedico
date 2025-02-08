@@ -28,7 +28,7 @@ namespace MsMedico.Api.Controllers
         }
 
         [HttpPut("editar-horario")]
-        [Authorize]
+        [Authorize(Roles = "Medico")]
         public ActionResult EditarHorario([FromBody] HorarioRequest request)
         {
             _medicoService.EditarHorario(request.CRM, request.Horario);
@@ -36,7 +36,7 @@ namespace MsMedico.Api.Controllers
         }
 
         [HttpPost("aceitar-consulta")]
-        [Authorize]
+        [Authorize(Roles = "Medico")]
         public ActionResult AceitarConsulta([FromBody] ConsultaRequest request)
         {
             _medicoService.AceitarConsulta(request.CRM, request.Consulta);
@@ -44,14 +44,27 @@ namespace MsMedico.Api.Controllers
         }
 
         [HttpPost("recusar-consulta")]
-        [Authorize]
+        [Authorize(Roles = "Medico")]
         public ActionResult RecusarConsulta([FromBody] ConsultaRequest request)
         {
             _medicoService.RecusarConsulta(request.CRM, request.Consulta);
             return Ok("Consulta recusada");
         }
 
+        [HttpGet("medico/{crm}")]
+        [Authorize(Roles = "Medico")]
+        public ActionResult<Medico> GetMedicoByCRM(string crm)
+        {
+            var medico = _medicoService.ObterMedicoPorCrm(crm);
+            if (medico == null)
+            {
+                return NotFound("Médico não encontrado");
+            }
+            return Ok(medico);
+        }
+
         [HttpGet("medicos")]
+        [Authorize(Roles = "Medico,Paciente")]
         public ActionResult<List<Medico>> GetMedicos([FromQuery] FiltroRequest filtros)
         {
             var medicosFiltrados = _medicoService.ObterMedicos(filtros.Especialidade, filtros.Latitude, filtros.Longitude, filtros.Distancia, 
@@ -60,6 +73,7 @@ namespace MsMedico.Api.Controllers
         }
 
         [HttpPost("agendar-consulta")]
+        [Authorize(Roles = "Paciente")]
         public ActionResult AgendarConsulta([FromBody] AgendamentoRequest request)
         {
             _medicoService.AgendarConsulta(request.CRM, request.Consulta);
@@ -67,6 +81,7 @@ namespace MsMedico.Api.Controllers
         }
 
         [HttpDelete("cancelar-consulta")]
+        [Authorize(Roles = "Paciente")]
         public ActionResult CancelarConsulta([FromBody] CancelamentoRequest request)
         {
             _medicoService.CancelarConsulta(request.CRM, request.ConsultaId, request.Justificativa);

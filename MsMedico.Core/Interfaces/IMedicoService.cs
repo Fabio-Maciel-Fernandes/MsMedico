@@ -15,10 +15,12 @@ namespace MsMedico.Core.Interfaces
         void EditarHorario(string crm, Horario horario);
         void AceitarConsulta(string crm, Consulta consulta);
         void RecusarConsulta(string crm, Consulta consulta);
+        Medico ObterMedicoPorCrm(string crm);
         List<Medico> ObterMedicos(string especialidade, double latitude, double longitude, double? distancia, double? avaliacao);
         void AgendarConsulta(string crm, Consulta consulta);
         void CancelarConsulta(string crm, int consultaId, string justificativa);
         void AdicionarRoleAoMedico(string crm, string role);
         List<string> ObterRolesDoMedico(string crm);
+        AgendaMedico ObterAgenda(string crm);
     }
 }

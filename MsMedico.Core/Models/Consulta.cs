@@ -8,8 +8,10 @@ namespace MsMedico.Core.Models
 {
     public class Consulta
     {
+        public decimal Valor { get; set; }
         public int Id { get; set; }
-        public string Paciente { get; set; }
+        public int PacienteId { get; set; }
+        public string PacienteCPF { get; set; }
         public DateTime Data { get; set; }
         public bool Aceita { get; set; }
     }

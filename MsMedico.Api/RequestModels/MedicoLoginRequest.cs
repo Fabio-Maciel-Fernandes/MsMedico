@@ -1,6 +1,6 @@
 ﻿namespace MsMedico.Api.RequestModels
 {
-    public class LoginRequest
+    public class MedicoLoginRequest
     {
         public string CRM { get; set; }
         public string Senha { get; set; }

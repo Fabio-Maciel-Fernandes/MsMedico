@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MsMedico.Core\MsMedico.Core.csproj" />
+    <ProjectReference Include="..\MsMedico.Shared\MsMedico.Shared.csproj" />
   </ItemGroup>
 
 </Project>
